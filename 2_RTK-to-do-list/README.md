@@ -41,3 +41,25 @@ yarn add react-redux @reduxjs/toolkit
 * `immer`를 사용하면 상태를 업데이트 할 때, `불변성을 신경쓰지 않으면서` 업데이트를 해도 `immer가 불변성 관리를 대신` 해준다!
 
   * 따라서 이전에는 원본 배열을 훼손하는 `push` 등의 사용이 권장되지 않았지만 RTK에서는 사용이 가능하다.
+
+<br/><br/>
+
+---
+
+<br/>
+
+# :microscope: Redux Devtools
+
+## 1) devtools 소개
+* redux를 사용하면, redux devtools를 사용할 수 있다.
+
+* 현재 프로젝트의 **state 상태, 어떤 action이 일어났을 때 그 action이 무엇인지와 그것으로 인해 state가 어떻게 변경되었는지 등을** 편리하게 파악 가능하다. 
+
+* [크롬 확장 프로그램 설치 링크](https://bit.ly/3naItJZ)
+
+<br/>
+
+## 2) devtools 사용법
+* 리액트 프로젝트에서 리덕스를 사용하고 있으면 플러그인에 녹색으로 불이 켜진다.
+
+* 개발자도구 탭에서 redux 메뉴를 이용해 다양한 정보를 볼 수 있다.
