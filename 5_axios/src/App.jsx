@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// AS-IS: 가공되지 않은 axios
+// import axios from 'axios';
+// TO-BE: 정제한 axios
+import api from './axios/api';
 
 function App() {
   // 새롭게 생성하는 todo를 관리하는 state로, json 형식을 맞추기 위해 객체 형식으로 선언
@@ -16,7 +19,9 @@ function App() {
     // await가 없으면 마운트가 되자마자 실행되기 때문에 'pending'으로 조회된다!
     // const { data } = await axios.get(`http://localhost:4000/todos`);
     // * env 환경변수 파일 이용
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos`);
+    // const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos`);
+    // * 가공한 axios 이용
+    const { data } = await api.get(`/todos`);
     // 서버로부터 fetching한 데이터를 useState의 state로 set
     setTodos(data);
   };
@@ -24,7 +29,7 @@ function App() {
   // ! 추가 함수
   // state로 관리 중이므로 인자를 따로 받지 않아도 됨
   const onSubmithandler = async () => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/todos`, iptValue);
+    api.post(`/todos`, iptValue);
     // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
     // state 추가 시 db에는 자동으로 id가 입력이 되지만 state는 id값을 알 수 없기 때문에
     // 다시 db를 읽어주는 방식으로 수정!
@@ -34,7 +39,7 @@ function App() {
 
   // ! 삭제 함수
   const onDeleteBtnHandler = async (id) => {
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
+    api.delete(`/todos/${id}`);
     // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
     setTodos(todos.filter((item) => item.id !== id));
   };
@@ -42,7 +47,7 @@ function App() {
   // ! 수정 함수
   // state로 관리 중이므로 인자를 따로 받지 않아도 됨
   const onUpdateBtnHandler = async () => {
-    axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${targetId}`, {
+    api.patch(`/todos/${targetId}`, {
       title: editContent,
     });
     // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
