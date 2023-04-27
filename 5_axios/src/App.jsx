@@ -8,18 +8,27 @@ function App() {
   });
   const [todos, setTodos] = useState(null);
 
+  // ! 조회 함수
   // * 비동기 함수 생성 (async-await 이용)
   const fetchTodos = async () => {
     // await가 없으면 마운트가 되자마자 실행되기 때문에 'pending'으로 조회된다!
-    const { data } = await axios.get('http://localhost:4000/todos');
+    const { data } = await axios.get(`http://localhost:4000/todos`);
     // 서버로부터 fetching한 데이터를 useState의 state로 set
     setTodos(data);
   };
 
+  // ! 추가 함수
   const onSubmithandler = async () => {
-    axios.post('http://localhost:4000/todos', iptValue);
+    axios.post(`http://localhost:4000/todos`, iptValue);
     // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
     setTodos(...todos, iptValue);
+  };
+
+  // ! 삭제 함수
+  const onDeleteBtnHandler = async (id) => {
+    axios.delete(`http://localhost:4000/todos/${id}`);
+    // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
+    setTodos(todos.filter((item) => item.id !== id));
   };
 
   // 생성한 함수를 컴포넌트가 mount 됐을 떄 실행하기 위해 useEffect를 사용
@@ -54,6 +63,7 @@ function App() {
           return (
             <div key={item.id}>
               {item.id} : {item.title}
+              &nbsp;<button onClick={() => onDeleteBtnHandler(item.id)}>삭제</button>
             </div>
           )
         })
