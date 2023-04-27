@@ -6,7 +6,9 @@ function App() {
   const [iptValue, setIptValue] = useState({
     title: '',
   });
-  const [todos, setTodos] = useState(null);
+  const [targetId, setTargetId] = useState('');
+  const [editContent, setEditContent] = useState('');
+  const [todos, setTodos] = useState([]);
 
   // ! 조회 함수
   // * 비동기 함수 생성 (async-await 이용)
@@ -18,10 +20,14 @@ function App() {
   };
 
   // ! 추가 함수
+  // state로 관리 중이므로 인자를 따로 받지 않아도 됨
   const onSubmithandler = async () => {
     axios.post(`http://localhost:4000/todos`, iptValue);
     // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
-    setTodos(...todos, iptValue);
+    // state 추가 시 db에는 자동으로 id가 입력이 되지만 state는 id값을 알 수 없기 때문에
+    // 다시 db를 읽어주는 방식으로 수정!
+    // setTodos(...todos, iptValue);
+    fetchTodos();
   };
 
   // ! 삭제 함수
@@ -29,6 +35,23 @@ function App() {
     axios.delete(`http://localhost:4000/todos/${id}`);
     // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
     setTodos(todos.filter((item) => item.id !== id));
+  };
+
+  // ! 수정 함수
+  // state로 관리 중이므로 인자를 따로 받지 않아도 됨
+  const onUpdateBtnHandler = async () => {
+    axios.patch(`http://localhost:4000/todos/${targetId}`, {
+      title: editContent,
+    });
+    // 새로고침해서 서버에서 데이터를 받아온것처럼 상태를 동기화시켜줌
+    setTodos(todos.map((item) => {
+      // 형변환을 하거나, 동등 연산자가 아닌 일치 연산자 사용
+      if (item.id == targetId) {
+        return {...item, title: editContent};
+      } else {
+        return item;
+      }
+    }));
   };
 
   // 생성한 함수를 컴포넌트가 mount 됐을 떄 실행하기 위해 useEffect를 사용
@@ -40,6 +63,23 @@ function App() {
 
   return (
     <div>
+      {/* Edit area */}
+      <div>
+        <input
+          type="text"
+          placeholder="수정할 아이디"
+          value={targetId}
+          onChange={(e) => setTargetId(e.target.value)}
+        />
+        <input 
+          type="text"
+          placeholder="수정할 내용"
+          value={editContent}
+          onChange={(e) => setEditContent(e.target.value)}
+        />
+        <button onClick={onUpdateBtnHandler}>수정</button>
+      </div>
+      <br />
       {/* input area */}
       <div>
         <form onSubmit={e => {
@@ -55,7 +95,7 @@ function App() {
           <button>추가</button>
         </form>
       </div>
-      
+      <br />
       {/* data area */}
       <div>
       {
