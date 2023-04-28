@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { plusNumber, minusNumber } from './redeux/modules/counterSlice';
+import { __plusNumber, __minusNumber } from './redeux/modules/counterSlice';
 
 function App() {
   const globalNumber = useSelector((state) => state.counter.number);
@@ -8,8 +8,8 @@ function App() {
   
   const dispatch = useDispatch();
 
-  const onPlusClickHandler = () => dispatch(plusNumber(+number));
-  const onMinusClickHandler = () => dispatch(minusNumber(-number));
+  const onPlusClickHandler = () => dispatch(__plusNumber(+number));
+  const onMinusClickHandler = () => dispatch(__minusNumber(+number));
 
   return (
     <div>

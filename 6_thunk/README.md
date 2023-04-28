@@ -94,9 +94,9 @@
 <br/>
 
 ### 3) thunk 구현 순서
-1. thunk 함수 만들기
+1. thunk 함수 만들기: `createAsyncThunk` (RTK 내장 API)
 
-2. extraReducer에 thunk 등록하기
+2. createSlice > extraReducer에 thunk 등록하기
 
 3. dispatch (thunk 함수) 하기
 
@@ -141,7 +141,7 @@
 <br/>
 
 ## 정리
-* 리덕스 미들웨어를 사용하면 action이 리듀서로 전달되기 전에 중간에 어떤 작업을 더 할 수 있다.
+* 리덕스 미들웨어를 사용하면 action이 리듀서로 전달되기 전에 `중간에` 어떤 작업을 더 할 수 있다.
 
 * thunk를 사용하면 객체가 아닌 `함수를 disptch` 할 수 있게 해준다.
 
