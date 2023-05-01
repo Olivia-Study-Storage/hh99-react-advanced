@@ -10,10 +10,21 @@
 # 1. Throttling & Debouncing이란?
 * Throttling & Debouncing은 `짧은 시간 간격으로 연속해서` 이벤트가 발생했을 때 과도한 이벤트 핸들러 호출을 방지하는 기법이다.
 
+* ex. SNS에서 좋아요 버튼을 너무 많이 눌렀을 때
+
 <br/>
 
 ### 1) Throttling 이란?
-![Throttling](https://bit.ly/428MgXa)
+* Leading Edge : 이벤트가 일어난 첫번째의 funtion을 일으킴
+    ![Leading Edge](https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff26d1090-3ffc-4fd6-ac89-7fda072b3e97%2FUntitled.png?id=0ea28fc3-fe69-49a3-9890-9b0e58c4b8ab&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1060&userId=&cache=v2)
+
+* Trailing Edge : 이벤트가 일어났을 때 어느정도 딜레이를 두고 마지막 function을 일으킴
+    ![Trailing Edge](https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa8a8627f-f0f4-4b6c-9da0-db565565c0c4%2FUntitled.png?id=6f621144-6490-45e3-a966-5e04df48aad9&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1060&userId=&cache=v2)
+
+* Leading & Trailing edge : 딜레이의 처음과 마지막 function을 일으킴
+    ![Leading & Trailing edge](https://bit.ly/428MgXa)
+
+<br/>
 
 * 시스템에서 처리할 수 있는 요청의 양을 제한하거나 조절하는 것을 의미
 
@@ -36,7 +47,7 @@
 
 * `짧은 시간 간격으로 연속해서` 이벤트가 발생하면 이벤트 핸들러를 호출하지 않다가 마지막 이벤트로부터 일정 시간(delay)이 경과한 후에 한 번만 호출하도록 하는 것
 
-* 주로 사용되는 예 : 입력값 실시간 검색, 화면 resize 이벤트
+* 주로 사용되는 예 : `입력값 실시간 검색`, `화면 resize 이벤트`
 
 <br/>
 
