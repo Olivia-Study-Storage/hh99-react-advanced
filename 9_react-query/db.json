@@ -1,0 +1,34 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "할 일 1",
+      "contents": "리액트 공부",
+      "isDone": false
+    },
+    {
+      "id": 1,
+      "title": "할 일 2",
+      "contents": "스프링 공부",
+      "isDone": true
+    },
+    {
+      "id": 1,
+      "title": "할 일 3",
+      "contents": "노드 공부",
+      "isDone": false
+    },
+    {
+      "title": "할 일 4",
+      "contents": "공부",
+      "isDone": false,
+      "id": "f6732c82-c68f-4330-921b-5b1580a00f9c"
+    },
+    {
+      "title": "할 일 5",
+      "contents": "테스트",
+      "isDone": false,
+      "id": "f36eb9f4-e832-4d23-bf48-80d67d97836d"
+    }
+  ]
+}
